@@ -1,0 +1,95 @@
+{
+  "SettingsVersion": 1.2,
+  "SimMode": "Multirotor",
+  "MinDistanceToMove": 0.5,
+  "ClockSpeed": 1,
+  "Recording": {
+    "RecordOnMove": false,
+    "RecordInterval": 0.05
+  },
+
+  "Vehicles": {
+		"Drone1": {
+		  "VehicleType": "SimpleFlight",
+          "X": 0, "Y": 0, "Z": -2,
+          "Sensors": {
+              "Gps": {
+                  "SensorType": 3,
+                  "Enabled": true,
+                  "EphTimeConstant": 0.9,
+                  "EpvTimeConstant": 0.9,
+                  "EphInitial": 25,
+                  "EpvInitial": 25,
+                  "EphFinal": 0.1,
+                  "EpvFinal": 0.1,
+                  "EphMin3d": 3,
+                  "EphMin2d": 4,
+                  "UpdateLatency": 0.2,
+                  "UpdateFrequency": 50,
+                  "StartupDelay": 1
+              }
+          }
+		}, 
+		"Drone2": {
+		  "VehicleType": "SimpleFlight",
+		    "X": -1.2, "Y": 0, "Z": -2,
+          "Sensors": {
+              "Gps": {
+                  "SensorType": 3,
+                  "Enabled": true,
+                  "EphTimeConstant": 0.9,
+                  "EpvTimeConstant": 0.9,
+                  "EphInitial": 25,
+                  "EpvInitial": 25,
+                  "EphFinal": 0.1,
+                  "EpvFinal": 0.1,
+                  "EphMin3d": 3,
+                  "EphMin2d": 4,
+                  "UpdateLatency": 0.2,
+                  "UpdateFrequency": 50,
+                  "StartupDelay": 1
+              }
+          }
+		},
+		"Drone3": {
+		  "VehicleType": "SimpleFlight",
+            "X": 1.2, "Y": 0, "Z": -2,
+          "Sensors": {
+              "Gps": {
+                  "SensorType": 3,
+                  "Enabled": true,
+                  "EphTimeConstant": 0.9,
+                  "EpvTimeConstant": 0.9,
+                  "EphInitial": 25,
+                  "EpvInitial": 25,
+                  "EphFinal": 0.1,
+                  "EpvFinal": 0.1,
+                  "EphMin3d": 3,
+                  "EphMin2d": 4,
+                  "UpdateLatency": 0.2,
+                  "UpdateFrequency": 50,
+                  "StartupDelay": 1
+              }
+          }
+		}
+  },
+  
+  "CameraDirector": {
+    "FollowDistance": -5,
+    "X": 8, "Y": 12, "Z": -30,
+    "Pitch": -90, "Roll": 0, "Yaw": 0
+  },
+  
+  "CameraDefaults": {
+      "CaptureSettings": [
+        {
+          "ImageType": 0,
+          "Width": 4056,
+          "Height": 3040,
+          "FOV_Degrees": 100,
+          "AutoExposureSpeed": 100,
+          "MotionBlurAmount": 0
+        }
+      ]
+  }
+}
