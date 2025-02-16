@@ -32,7 +32,7 @@ cd DARP-3D
 
 ### 2. Prerequisites:
 1. **Configure Input File**  
-   - Modify [`input_variables_choose_path.json`](input_variables_choose_path.json) with parameters in the order listed above.
+   - Modify [`inputVariables_choosepath.json`](inputVariables_choosepath.json) with parameters in the order listed above.
 
 2. **Point Cloud Setup**  
    - Place your point cloud file as `./odm/data.laz` in **WGS84 coordinates**.  
