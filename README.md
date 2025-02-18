@@ -1,4 +1,4 @@
-# DARP-3D
+# TerraPlan
 
 ## Description 
 
