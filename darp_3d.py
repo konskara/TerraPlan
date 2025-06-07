@@ -8,6 +8,7 @@ from RealWorld.real_world_parameter_parser import real_world
 import concurrent.futures
 from scipy.spatial import cKDTree
 from writeToJson import wp_json
+import copy
 
 class darp_3d:
     def __init__(self, DARPwaypoints, Hoffset=5, height_margin=0.5, RefineWPS=False) -> None:
@@ -449,7 +450,7 @@ class darp_3d:
         return self.cameraAngles
 
     def writeToJson(self):
-        local_wps = np.array(self.outWaypoints)
+        local_wps = copy.deepcopy(self.outWaypoints)
 
         for drone in local_wps:
             for waypoint in drone:

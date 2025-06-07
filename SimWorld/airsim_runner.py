@@ -82,10 +82,10 @@ def run_airsim(real_world_parameters, init_posNED, WaypointsNED, cameraAngles, D
     # Drawn lines in AirSim will be placed above actual path so that they don't obstruct image capture
     lines_path = copy.deepcopy(path_drone) # Create deep copy of waypoints for colored line depiction
     init_pos_lines = copy.deepcopy(init_pos_drone) # Create deep copy of initial positions for colored point depiction
-#    for i in range(nof_drones):
-#        for j in range(len(lines_path[i])):
-#            lines_path[i][j].z_val -= 3
-#        init_pos_lines[i].z_val -= 3
+    for i in range(nof_drones):
+        for j in range(len(lines_path[i])):
+            lines_path[i][j].z_val -= 3
+        init_pos_lines[i].z_val -= 3
 
     client.simFlushPersistentMarkers()
 
