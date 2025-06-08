@@ -82,10 +82,10 @@ def run_airsim(real_world_parameters, init_posNED, WaypointsNED, cameraAngles, D
     # Drawn lines in AirSim will be placed above actual path so that they don't obstruct image capture
     lines_path = copy.deepcopy(path_drone) # Create deep copy of waypoints for colored line depiction
     init_pos_lines = copy.deepcopy(init_pos_drone) # Create deep copy of initial positions for colored point depiction
-    for i in range(nof_drones):
-        for j in range(len(lines_path[i])):
-            lines_path[i][j].z_val -= 3
-        init_pos_lines[i].z_val -= 3
+#    for i in range(nof_drones):
+#        for j in range(len(lines_path[i])):
+#            lines_path[i][j].z_val -= 3
+#        init_pos_lines[i].z_val -= 3
 
     client.simFlushPersistentMarkers()
 
@@ -224,10 +224,12 @@ def run_airsim(real_world_parameters, init_posNED, WaypointsNED, cameraAngles, D
     if Darp3D:
         for i in range(nof_drones):
             p1 = multiprocessing.Process(target=Set_Camera.setCam, args=(path_drone[i], cameraAngles[i], 0.1, drone_names[i], events[i], Darp3D))
+            p1.daemon = True 
             p1.start()
     else:
         for i in range(nof_drones):
             p1 = multiprocessing.Process(target=Set_Camera.setCam, args=(path_drone[i], 0, 0.5, drone_names[i], events[i], Darp3D))
+            p1.daemon = True 
             p1.start()
 
     # Call image capture script for each drone
@@ -235,16 +237,39 @@ def run_airsim(real_world_parameters, init_posNED, WaypointsNED, cameraAngles, D
     #pid = os.getpid()
     for i in range(nof_drones):
         p2 = multiprocessing.Process(target=Image_capture.capture, args=(path_drone[i], settings_path, image_storage_path, nof_images[i], delay, drone_names[i], events[i]))
+        p2.daemon = True 
         p2.start()
     print("Image capture scheduler has started in the background")
 
-    # Wait until drones fully follow the paths
-    for i in range(nof_drones):
-        resulting_path[i].join()
+    # Stop image capture, regardless of order of completion
+    completion_queue = multiprocessing.Queue()
 
-        # Signal the subprocesses to stop
-        events[i].set()
-        print(f'drone{i+1} stop')
+    def drone_completion_handler(i, queue):
+        time.sleep(2 * (i + 1))
+        print(f"started monitoring drone{i+1}")
+        resulting_path[i].join()
+        time.sleep(i * 1)
+        queue.put(i)
+
+    handler_processes = []
+    for i in range(nof_drones):
+        p = multiprocessing.Process(
+            target=drone_completion_handler,
+            args=(i, completion_queue)
+        )
+        p.daemon = True 
+        p.start()
+        handler_processes.append(p)
+
+    received = 0
+    while received < nof_drones:
+        try:
+            i = completion_queue.get(timeout=0.1)
+            events[i].set() 
+            print(f'drone{i+1} stop')
+            received += 1
+        except:
+            time.sleep(0.1)
 
 #    # Reach last point
 #    f_last_pos = []
