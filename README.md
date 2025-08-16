@@ -79,3 +79,18 @@ python main.py -Darp3D [options]
 
 Distributed under the MIT License.
 
+## Cite as:
+*Karakontis, K., Petsanis, T., Kapoutsis, A. C., Kapoutsis, P. C., & Kosmatopoulos, E. B. (2025, June). Terrain-Aware Adaptation for Two-Dimensional UAV Path Planners. In 2025 33rd Mediterranean Conference on Control and Automation (MED) (pp. 636-641). IEEE.* 
+
+[[Link](https://ieeexplore.ieee.org/document/11073484)]
+
+```bibtex
+@inproceedings{karakontis2025terrain,
+  title={Terrain-Aware Adaptation for Two-Dimensional UAV Path Planners},
+  author={Karakontis, Kostas and Petsanis, Thanos and Kapoutsis, Athanasios Ch and Kapoutsis, Pavlos Ch and Kosmatopoulos, Elias B},
+  booktitle={2025 33rd Mediterranean Conference on Control and Automation (MED)},
+  pages={636--641},
+  year={2025},
+  organization={IEEE}
+}
+```
